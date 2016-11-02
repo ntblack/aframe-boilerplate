@@ -5,14 +5,74 @@
     <title>Hello, World! - A-Frame</title>
     <meta name="description" content="Hello, World! - A-Frame">
     <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
+    <script>
+    function togglePlay() {
+      var playing = false;
+      var playColor = "#48f442";
+      var pauseColor = "#FFC65D"
+      return function(event, object) {
+        playing = !playing;
+        console.log("toggle play " + playing);
+        var video = document.querySelector('#video');
+        var controller = event.detail.target;
+        if(playing) {
+          video.play();
+          controller.setAttribute('color', playColor);
+        } else {
+          video.pause();
+          controller.setAttribute('color', pauseColor);
+        }
+      }
+    }
+    </script>
   </head>
   <body>
-    <a-scene>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
-    </a-scene>
+
+<a-scene stats>
+  <a-entity camera="userHeight: 1.7" wasd-controls look-controls>
+    <a-entity cursor="fuse: true; maxDistance: 30; timeout: 500"
+            scale="0.1, 0.1, 1"
+            position="0 0 -1"
+            geometry="primitive: ring"
+            material="color: white; shader: flat">
+    </a-entity>
+  </a-entity>
+  <a-assets>
+    <img id="nyancat" src="./images/nyancat.png"></img>
+    <!-- video id="video" src="https://ia800502.us.archive.org/10/items/WebmVp8Vorbis/webmvp8_512kb.mp4"></video -->
+    <!-- note that this only works in iOS 10 and CORS doesn't work -->
+    <video playsinline muted autoplay="false" id="video" src="./video/webmvp8_512kb.mp4"></video>
+  </a-assets>
+  <a-sphere position="0 1.25 -5" radius="1.25" color="#FFF">
+  <a-animation attribute="position" from="0 1.25 -5" to="0 5.25 -5" direction="alternate" repeat="indefinite" easing="ease-in-out-elastic"></a-animation>
+  </a-sphere>
+  <a-box id="fading-cube" position="-1 0.5 -3" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" material="src: #nyancat">
+    <a-animation attribute="scale" begin="click" delay="1000" from="1 1 1" to="2 2 2" easing="ease-out-elastic" direction="alternate" repeat="indefinite"></a-animation>
+    <a-animation attribute="rotation" from="0 0 0" to="0 360 0" dur="10000" repeat="indefinite" easing="linear"></a-animation>
+    <a-animation attribute="material.opacity" begin="fade" to="0" dur="2000"></a-animation>
+    <a-animation attribute="material.opacity" begin="unfade" to="1"></a-animation>
+  </a-box>
+
+  <a-entity position="1 0.75 -3">
+    <a-cylinder id="player" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+    <a-plane scale="1.733 1 1" position="0 1.75 0" src="#video"></a-plane>
+  </a-entity>
+
+  <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+
+  <a-sky color="#ECECEC"></a-sky>
+</a-scene>
+
+
+
   </body>
+  <script>
+    var cylinder = document.querySelector('#player');
+
+    if(!document.createElement('video').canPlayType('video/mp4')) {
+      cylinder.setAttribute('color', '#f21010');
+    }
+    document.querySelector('#video').pause();
+    cylinder.addEventListener('click', togglePlay());
+  </script>
 </html>
