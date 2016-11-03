@@ -44,10 +44,10 @@
     <video playsinline muted autoplay="false" id="video" src="./video/webmvp8_512kb.mp4"></video>
   </a-assets>
   <a-sphere position="0 1.25 -5" radius="1.25" color="#FFF">
-  <a-animation attribute="position" from="0 1.25 -5" to="0 5.25 -5" direction="alternate" repeat="indefinite" easing="ease-in-out-elastic"></a-animation>
+  <a-animation attribute="position" begin="click" from="0 1.25 -5" to="0 5.25 -5" direction="alternate" repeat="1" easing="ease-in-out-elastic"></a-animation>
   </a-sphere>
   <a-box id="fading-cube" position="-1 0.5 -3" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" material="src: #nyancat">
-    <a-animation attribute="scale" begin="click" delay="1000" from="1 1 1" to="2 2 2" easing="ease-out-elastic" direction="alternate" repeat="indefinite"></a-animation>
+    <a-animation attribute="scale" begin="click" delay="1000" from="1 1 1" to="2 2 2" easing="ease-out-elastic" direction="alternate" repeat="1"></a-animation>
     <a-animation attribute="rotation" from="0 0 0" to="0 360 0" dur="10000" repeat="indefinite" easing="linear"></a-animation>
     <a-animation attribute="material.opacity" begin="fade" to="0" dur="2000"></a-animation>
     <a-animation attribute="material.opacity" begin="unfade" to="1"></a-animation>
