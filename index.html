@@ -31,8 +31,8 @@
 <a-scene stats>
   <a-entity camera="userHeight: 1.7" wasd-controls look-controls>
     <a-entity cursor="fuse: true; maxDistance: 30; timeout: 500"
-            scale="0.1, 0.1, 1"
-            position="0 0 -1"
+            scale="0.01, 0.01, 1"
+            position="0 0 -0.25"
             geometry="primitive: ring"
             material="color: white; shader: flat">
     </a-entity>
@@ -43,7 +43,7 @@
     <!-- note that this only works in iOS 10 and CORS doesn't work -->
     <video playsinline muted autoplay="false" id="video" src="./video/webmvp8_512kb.mp4"></video>
   </a-assets>
-  <a-sphere position="0 1.25 -5" radius="1.25" color="#FFF">
+  <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E">
   <a-animation attribute="position" begin="click" from="0 1.25 -5" to="0 5.25 -5" direction="alternate" repeat="1" easing="ease-in-out-elastic"></a-animation>
   </a-sphere>
   <a-box id="fading-cube" position="-1 0.5 -3" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" material="src: #nyancat">
